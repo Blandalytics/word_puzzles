@@ -456,7 +456,7 @@ def plot_crossword(a, size):
     # checkbox = st.checkbox('Download PDF', value='')
     # if checkbox:
     pdf_name = 'crossword.pdf'
-    fig.savefig(pdf_name,format='pdf)
+    fig.savefig(pdf_name,format='pdf')
     # create_pdf(img_name, pdf_name)
 
     with open(pdf_name, 'rb') as h_pdf:
