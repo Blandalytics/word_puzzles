@@ -411,7 +411,7 @@ def plot_crossword(a, size):
                             sharex='row', sharey='row',
                             dpi=600,
                             gridspec_kw={'hspace':0,'wspace':0,
-                                        'height_ratios':[0.7/word_df.shape[0]]*word_df.shape[0]+[0.3]})
+                                        'height_ratios':[0.6/word_df.shape[0]]*word_df.shape[0]+[0.4]})
     for x in range(word_df.shape[1]):
         for y in range(word_df.shape[0]):
             if letter_lists[y-1][x-1] != '_':
