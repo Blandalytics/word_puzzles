@@ -443,8 +443,8 @@ def plot_crossword(a, size):
     axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
-    img_name = 'crossword.png'
-    fig.savefig(img_name)
+    # img_name = 'crossword.pdf'
+    # fig.savefig(img_name,format='pdf)
     # # png_name = 'crossword.png'
     # # with open(img_name, "rb") as f:
     # #     st.download_button(
@@ -455,18 +455,19 @@ def plot_crossword(a, size):
 
     # checkbox = st.checkbox('Download PDF', value='')
     # if checkbox:
-    pdf_name = 'mypdf.pdf'
-    create_pdf(img_name, pdf_name)
+    pdf_name = 'crossword.pdf'
+    fig.savefig(pdf_name,format='pdf)
+    # create_pdf(img_name, pdf_name)
 
     with open(pdf_name, 'rb') as h_pdf:
         st.download_button(
             label="Download PDF",
             data=h_pdf,
-            file_name="crossword.pdf",
+            file_name=pdf_name,
             mime="application/pdf",
             icon=":material/download:",
         )
-    st.pyplot(fig,use_container_width=False)
+    st.pyplot(fig)
 
 st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
 st.title('Word Puzzle Generator')
