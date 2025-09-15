@@ -434,7 +434,7 @@ if st.button('Generate Crossword Puzzle from word list'):
     if len(a.current_word_list) != len(word_list):
         st.write('Could not fit all words into a crossword')
     else:
-        plot_crossword(a, size)
+        plt = plot_crossword(a, size)
         # Convert chart to jpg image (base64 encoded)
         stringIObytes = io.BytesIO()
         plt.savefig(stringIObytes, format='jpg')
