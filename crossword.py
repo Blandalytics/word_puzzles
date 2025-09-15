@@ -15,6 +15,7 @@ import textwrap
 import time
 
 from copy import copy as duplicate
+from fpdf import FPDF
 
 class Crossword(object):
     def __init__(self, cols, rows, empty='-', maxloops=4000, available_words=[]):
@@ -439,7 +440,7 @@ def plot_crossword(a, size):
     axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
-    img_name = 'base_crossword.png'
+    img_name = 'crossword.png'
     fig.savefig(img_name)
     # png_name = 'crossword.png'
     # with open(img_name, "rb") as f:
