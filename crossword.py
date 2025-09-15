@@ -442,7 +442,7 @@ def plot_crossword(a, size):
     img_name = 'base_crossword.png'
     fig.savefig(img_name)
     png_name = 'crossword.png'
-    with open(img_fn, "rb") as f:
+    with open(img_name, "rb") as f:
         st.download_button(
             label="Download as pdf",
             data=f,
@@ -451,10 +451,10 @@ def plot_crossword(a, size):
 
     checkbox = st.checkbox('Name', value='')
     if checkbox:
-        pdf_fn = 'mypdf.pdf'
-        create_pdf(img_name, pdf_fn)
+        pdf_name = 'mypdf.pdf'
+        create_pdf(img_name, pdf_name)
 
-        with open(pdf_fn, 'rb') as h_pdf:
+        with open(pdf_name, 'rb') as h_pdf:
             st.download_button(
                 label="Download PDF",
                 data=h_pdf,
