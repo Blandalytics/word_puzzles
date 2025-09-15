@@ -13,6 +13,7 @@ import seaborn as sns
 import string
 import textwrap
 import time
+import tqdm
 
 from copy import copy as duplicate
 from fpdf import FPDF
@@ -399,11 +400,13 @@ def generate_crossword(word_list):
     maxloops = 5000
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
+    pbar = tqdm(total=14, desc='Trying grid sizes')
     while (len(a.current_word_list) != len(word_list)) & (size < 26):
         size +=1 
         a = Crossword(size, size, '_', maxloops, word_list)
         a.compute_crossword(spins)
-
+        pbar.update(1)
+    pbar.close()
     return a, size
 
 def plot_crossword(a, size):
