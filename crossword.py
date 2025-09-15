@@ -431,6 +431,11 @@ def plot_crossword(a, size):
     sns.despine(top=False,right=False)
     st.pyplot(fig,use_container_width=False)
 
+st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
+st.title('Word Puzzle Generator')
+st.write('Pulls words and definitions from [this Google Sheet](https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/edit?usp=sharing)')
+
+st.header('Crossword')
 a, size = generate_crossword(word_list)
 if len(a.current_word_list) != len(word_list):
     st.write('Could not fit all words into a crossword')
