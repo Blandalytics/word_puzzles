@@ -422,6 +422,7 @@ def plot_crossword(a, size):
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
     st.pyplot(fig,use_container_width=False)
+    return plt
 
 st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
 st.title('Word Puzzle Generator')
