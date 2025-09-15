@@ -439,3 +439,15 @@ if st.button('Generate Crossword Puzzle from word list'):
         st.write('Could not fit all words into a crossword')
     else:
         plot_crossword(a, size)
+        show_print_button ="""
+            <script>
+                function print_page(obj) {
+                    obj.style.display = "none";
+                    parent.window.print();
+                }
+            </script>
+            <button onclick="print_page(this)">
+                Print page (choose 'Save as PDF' in print dialogue)
+            </button>
+            """
+        components.html(show_print_button)
