@@ -152,19 +152,6 @@ class Crossword(object):
                 # top left seed of longest word yields best results (maybe override)
                 vertical, col, row = random.randrange(0, 2), 1, 1
 
-                """ 
-                # optional center seed method, slower and less keyword placement
-                if vertical:
-                    col = int(round((self.cols+1)/2, 0))
-                    row = int(round((self.rows+1)/2, 0)) - int(round((word.length+1)/2, 0))
-                else:
-                    col = int(round((self.cols+1)/2, 0)) - int(round((word.length+1)/2, 0))
-                    row = int(round((self.rows+1)/2, 0))
-                # completely random seed method
-                col = random.randrange(1, self.cols + 1)
-                row = random.randrange(1, self.rows + 1)
-                """
- 
                 if self.check_fit_score(col, row, vertical, word):
                     fit = True
                     self.set_word(col, row, vertical, word, force=True)
