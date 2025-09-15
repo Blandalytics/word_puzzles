@@ -344,14 +344,14 @@ class Crossword(object):
         for word in self.current_word_list:
             if word.down_across()=='across':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n    '.join(textwrap.TextWrapper(width=20).wrap(word.clue))
+                clue = '\n     '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
 
         outStr += '\nDown:\n'
         for word in self.current_word_list:
             if word.down_across()=='down':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n    '.join(textwrap.TextWrapper(width=30).wrap(word.clue))
+                clue = '\n     '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
         return outStr
 
