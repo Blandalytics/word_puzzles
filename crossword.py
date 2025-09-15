@@ -406,7 +406,7 @@ def plot_crossword(a, size):
                                       data=[[None] * word_df.shape[1]])],
                         ignore_index=True)
 
-    page_scales = len(letter_lists)*0.022
+    page_scales = len(letter_lists)*0.025
     fig, axs = plt.subplots(word_df.shape[0]+1, word_df.shape[1],
                             figsize=(17,22),
                             sharex='row', sharey='row',
