@@ -398,15 +398,18 @@ def generate_crossword(word_list):
     size = 12
     spins = 3
     maxloops = 5000
+    
+    progress_text = "Trying different grid sizes."
+    my_bar = st.progress(1/14, text=progress_text)
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
-    pbar = tqdm.tqdm(total=14, desc='Trying grid sizes')
     while (len(a.current_word_list) != len(word_list)) & (size < 26):
         size +=1 
+        my_bar.progress(percent_complete + 1/14, text=progress_text)
         a = Crossword(size, size, '_', maxloops, word_list)
         a.compute_crossword(spins)
-        pbar.update(1)
-    pbar.close()
+        
+    my_bar.empty()
     return a, size
 
 def plot_crossword(a, size):
