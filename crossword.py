@@ -441,26 +441,27 @@ def plot_crossword(a, size):
     sns.despine(top=False,right=False)
     img_name = 'base_crossword.png'
     fig.savefig(img_name)
-    png_name = 'crossword.png'
-    with open(img_name, "rb") as f:
+    # png_name = 'crossword.png'
+    # with open(img_name, "rb") as f:
+    #     st.download_button(
+    #         label="Download as pdf",
+    #         data=f,
+    #         file_name=png_name,
+    #         mime="image/png")
+
+    # checkbox = st.checkbox('Name', value='')
+    # if checkbox:
+    pdf_name = 'mypdf.pdf'
+    create_pdf(img_name, pdf_name)
+
+    with open(pdf_name, 'rb') as h_pdf:
         st.download_button(
-            label="Download as pdf",
-            data=f,
-            file_name=png_name,
-            mime="image/png")
-
-    checkbox = st.checkbox('Name', value='')
-    if checkbox:
-        pdf_name = 'mypdf.pdf'
-        create_pdf(img_name, pdf_name)
-
-        with open(pdf_name, 'rb') as h_pdf:
-            st.download_button(
-                label="Download PDF",
-                data=h_pdf,
-                file_name="crossword.pdf",
-                mime="application/pdf",
-            )
+            label="Download PDF",
+            data=h_pdf,
+            file_name="crossword.pdf",
+            mime="application/pdf",
+            icon=":material/download:",
+        )
     st.pyplot(fig,use_container_width=False)
 
 st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
