@@ -399,15 +399,14 @@ def generate_crossword(word_list):
     spins = 3
     maxloops = 5000
     
-    progress_text = "Trying different grid sizes."
     sizes_checked = 1/14
-    my_bar = st.progress(sizes_checked, text=progress_text)
+    my_bar = st.progress(sizes_checked, text=f'Checking {size}x{size} grid')
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
     while (len(a.current_word_list) != len(word_list)) & (size < 26):
         size +=1 
         sizes_checked += 1/14
-        my_bar.progress(sizes_checked, text=progress_text)
+        my_bar.progress(sizes_checked, text=f'Checking {size}x{size} grid')
         a = Crossword(size, size, '_', maxloops, word_list)
         a.compute_crossword(spins)
         
