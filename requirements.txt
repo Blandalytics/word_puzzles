@@ -1,4 +1,5 @@
 streamlit
+fpdf
 numpy
 matplotlib
 pandas
