@@ -433,21 +433,9 @@ st.title('Word Puzzle Generator')
 st.write('Pulls words and definitions from [this Google Sheet](https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/edit?usp=sharing)')
 
 st.header('Crossword Puzzle')
-if st.button('Generate Crossword Puzzle from word list'):
+if st.button('Generate and preview Crossword Puzzle from word list'):
     a, size = generate_crossword(word_list)
     if len(a.current_word_list) != len(word_list):
         st.write('Could not fit all words into a crossword')
     else:
         plot_crossword(a, size)
-        show_print_button ="""
-            <script>
-                function print_page(obj) {
-                    obj.style.display = "none";
-                    parent.window.print();
-                }
-            </script>
-            <button onclick="print_page(this)">
-                Print page (choose 'Save as PDF' in print dialogue)
-            </button>
-            """
-        components.html(show_print_button)
