@@ -407,7 +407,7 @@ def plot_crossword(a, size):
                         ignore_index=True)
     
     fig, axs = plt.subplots(word_df.shape[0]+1, word_df.shape[1],
-                            figsize=(8.5,11),
+                            figsize=(17,22),
                             sharex='row', sharey='row',
                             dpi=400,
                             gridspec_kw={'hspace':0,'wspace':0,
@@ -422,7 +422,7 @@ def plot_crossword(a, size):
             else:
                 axs[y,x].set_axis_off()
         axs[word_df.shape[0],x].set_axis_off()
-    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=9)
+    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=8)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
     st.pyplot(fig,use_container_width=False)
