@@ -400,7 +400,7 @@ def generate_crossword(word_list):
     maxloops = 5000
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
-    pbar = tqdm(total=14, desc='Trying grid sizes')
+    pbar = tqdm.tqdm(total=14, desc='Trying grid sizes')
     while (len(a.current_word_list) != len(word_list)) & (size < 26):
         size +=1 
         a = Crossword(size, size, '_', maxloops, word_list)
