@@ -405,13 +405,14 @@ def plot_crossword(a, size):
                         pd.DataFrame(columns=word_df.columns,
                                       data=[[None] * word_df.shape[1]])],
                         ignore_index=True)
-    
+
+    page_scales = len(letter_lists)*0.021
     fig, axs = plt.subplots(word_df.shape[0]+1, word_df.shape[1],
                             figsize=(17,22),
                             sharex='row', sharey='row',
                             dpi=400,
                             gridspec_kw={'hspace':0,'wspace':0,
-                                        'height_ratios':[0.6/word_df.shape[0]]*word_df.shape[0]+[0.4]})
+                                        'height_ratios':[(1-page_scales)/word_df.shape[0]]*word_df.shape[0]+[page_scales]})
     for x in range(word_df.shape[1]):
         for y in range(word_df.shape[0]):
             if letter_lists[y-1][x-1] != '_':
