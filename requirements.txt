@@ -2,4 +2,5 @@ streamlit
 numpy
 matplotlib
 pandas
+pdfkit
 seaborn
