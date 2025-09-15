@@ -443,8 +443,8 @@ def plot_crossword(a, size):
     axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
-    # img_name = 'crossword.png'
-    # fig.savefig(img_name)
+    img_name = 'crossword.png'
+    fig.savefig(img_name)
     # # png_name = 'crossword.png'
     # # with open(img_name, "rb") as f:
     # #     st.download_button(
