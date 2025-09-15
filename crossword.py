@@ -344,14 +344,14 @@ class Crossword(object):
         for word in self.current_word_list:
             if word.down_across()=='across':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n     '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
+                clue = '\n      '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
 
         outStr += '\nDown:\n'
         for word in self.current_word_list:
             if word.down_across()=='down':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n     '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
+                clue = '\n      '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
         return outStr
 
@@ -421,11 +421,10 @@ def plot_crossword(a, size):
             else:
                 axs[y,x].set_axis_off()
         axs[word_df.shape[0],x].set_axis_off()
-    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=12)
+    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=8)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
     st.pyplot(fig,use_container_width=False)
-    return plt
 
 st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
 st.title('Word Puzzle Generator')
@@ -437,22 +436,4 @@ if st.button('Generate Crossword Puzzle from word list'):
     if len(a.current_word_list) != len(word_list):
         st.write('Could not fit all words into a crossword')
     else:
-        plt = plot_crossword(a, size)
-        # Convert chart to jpg image (base64 encoded)
-        stringIObytes = io.BytesIO()
-        plt.savefig(stringIObytes, format='jpg')
-        stringIObytes.seek(0)
-        base64_jpg = base64.b64encode(stringIObytes.read()).decode()
-        
-        # Create HTML for report
-        img_html = '<img src="data:image/png;base64, ' + base64_jpg + '" width=100%>'      
-        html = "<h1>Crossword Puzzle</h1>" + img_html
-        file_name = 'crossword_puzzle.pdf'
-        pdfkit.from_string(html, file_name)
-        with open(file_name, "rb") as pdf_file:
-            st.download_button(
-                'Download PDF',
-                data = pdf_file,
-                file_name = file_name,
-                mime = 'application/octet-stream')
-            os.remove(file_name)
+        plot_crossword(a, size)
