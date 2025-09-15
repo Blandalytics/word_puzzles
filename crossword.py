@@ -11,6 +11,7 @@ import random
 import re
 import seaborn as sns
 import string
+import textwrap
 import time
 
 from copy import copy as duplicate
@@ -343,13 +344,15 @@ class Crossword(object):
         for word in self.current_word_list:
             if word.down_across()=='across':
                 space_pad = '   ' if word.number <10 else ' '
-                outStr += f'{word.number:.0f}.{space_pad}{word.clue}\n'
+                clue = '\n    '.join(textwrap.TextWrapper(width=20).wrap(word.clue))
+                outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
 
         outStr += '\nDown:\n'
         for word in self.current_word_list:
             if word.down_across()=='down':
                 space_pad = '   ' if word.number <10 else ' '
-                outStr += f'{word.number:.0f}.{space_pad}{word.clue}\n'
+                clue = '\n    '.join(textwrap.TextWrapper(width=30).wrap(word.clue))
+                outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
         return outStr
 
 
@@ -404,7 +407,7 @@ def plot_crossword(a, size):
                         ignore_index=True)
     
     fig, axs = plt.subplots(word_df.shape[0]+1, word_df.shape[1],
-                            figsize=(11,11),
+                            figsize=(8.5,11),
                             sharex='row', sharey='row',
                             dpi=600,
                             gridspec_kw={'hspace':0,'wspace':0})
