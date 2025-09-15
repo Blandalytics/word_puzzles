@@ -409,7 +409,7 @@ def plot_crossword(a, size):
     fig, axs = plt.subplots(word_df.shape[0]+1, word_df.shape[1],
                             figsize=(8.5,11),
                             sharex='row', sharey='row',
-                            dpi=600,
+                            dpi=400,
                             gridspec_kw={'hspace':0,'wspace':0,
                                         'height_ratios':[0.6/word_df.shape[0]]*word_df.shape[0]+[0.4]})
     for x in range(word_df.shape[1]):
