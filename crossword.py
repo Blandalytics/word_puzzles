@@ -377,6 +377,19 @@ class Word(object):
     def __repr__(self):
         return self.word
 
+def create_pdf(img_fn, pdf_fn):
+    """
+    Create pdf written to pdf_fn with the image file img_fn.
+    """
+    pdf = FPDF()
+    pdf.add_page()
+
+    # Save to pdf
+    pdf.set_xy(30, 50)
+    pdf.image(img_fn, w=140, h=110)
+    pdf.output(pdf_fn)
+
+
 word_list = [list(x) for x in pd.read_csv('https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/export?format=csv').to_numpy()]
 
 def generate_crossword(word_list):
@@ -426,6 +439,28 @@ def plot_crossword(a, size):
     axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
     axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
+    img_name = 'base_crossword.png'
+    fig.savefig(img_name)
+    png_name = 'crossword.png'
+    with open(img_fn, "rb") as f:
+        st.download_button(
+            label="Download as pdf",
+            data=f,
+            file_name=png_name,
+            mime="image/png")
+
+    checkbox = st.checkbox('Name', value='')
+    if checkbox:
+        pdf_fn = 'mypdf.pdf'
+        create_pdf(img_name, pdf_fn)
+
+        with open(pdf_fn, 'rb') as h_pdf:
+            st.download_button(
+                label="Download PDF",
+                data=h_pdf,
+                file_name="crossword.pdf",
+                mime="application/pdf",
+            )
     st.pyplot(fig,use_container_width=False)
 
 st.set_page_config(page_title='Word Puzzle Generator', page_icon='https://static.nytimes.com/assets-oma/images/crossword-icon.svg',layout="wide")
