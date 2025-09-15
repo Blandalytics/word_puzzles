@@ -1,4 +1,9 @@
+import base64
+import io
+import os
+import pdfkit
 import streamlit as st
+import streamlit.components.v1 as components
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -429,3 +434,21 @@ if st.button('Generate Crossword Puzzle from word list'):
         st.write('Could not fit all words into a crossword')
     else:
         plot_crossword(a, size)
+        # Convert chart to jpg image (base64 encoded)
+        stringIObytes = io.BytesIO()
+        plt.savefig(stringIObytes, format='jpg')
+        stringIObytes.seek(0)
+        base64_jpg = base64.b64encode(stringIObytes.read()).decode()
+        
+        # Create HTML for report
+        img_html = '<img src="data:image/png;base64, ' + base64_jpg + '" width=100%>'      
+        html = "<h1>Crossword Puzzle</h1>" + img_html
+        file_name = 'crossword_puzzle.pdf'
+        pdfkit.from_string(html, file_name)
+        with open(file_name, "rb") as pdf_file:
+            st.download_button(
+                'Download PDF',
+                data = pdf_file,
+                file_name = file_name,
+                mime = 'application/octet-stream')
+            os.remove(file_name)
