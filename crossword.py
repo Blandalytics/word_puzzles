@@ -346,14 +346,14 @@ class Crossword(object):
         for word in self.current_word_list:
             if word.down_across()=='across':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n      '.join(textwrap.TextWrapper(width=85).wrap(word.clue))
+                clue = '\n      '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
 
         outStr += '\nDown:\n'
         for word in self.current_word_list:
             if word.down_across()=='down':
                 space_pad = '   ' if word.number <10 else ' '
-                clue = '\n      '.join(textwrap.TextWrapper(width=85).wrap(word.clue))
+                clue = '\n      '.join(textwrap.TextWrapper(width=60).wrap(word.clue))
                 outStr += f'{word.number:.0f}.{space_pad}{clue}\n'
         return outStr
 
@@ -447,7 +447,7 @@ def plot_crossword(a, size, checkbox):
     axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
     axs[word_df.shape[0],0].set_axis_off()
     if checkbox:
-        axs[word_df.shape[0],word_df.shape[1]-2].text(1,0.95,a.word_bank(),va='top',fontsize=18)
+        axs[word_df.shape[0],word_df.shape[1]-2].text(1,0.95,'Word Bank:\n\n'+a.word_bank(),va='top',fontsize=18)
         axs[word_df.shape[0],word_df.shape[1]-2].set_axis_off()
     sns.despine(top=False,right=False)
     pdf_name = 'crossword.pdf'
