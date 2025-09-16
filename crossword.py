@@ -413,7 +413,7 @@ def generate_crossword(word_list):
     my_bar.empty()
     return a, size
 
-def plot_crossword(a, size):
+def plot_crossword(a, size, checkbox):
     letter_lists = [x.split() for x in a.display().split('\n')[:-1]]
     word_df = pd.DataFrame(letter_lists).replace('_',None)
     if (len(word_df[size-1].unique())==1) & (len(word_df.iloc[size-1].unique())==1):
@@ -444,21 +444,12 @@ def plot_crossword(a, size):
             else:
                 axs[y,x].set_axis_off()
         axs[word_df.shape[0],x].set_axis_off()
-    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
-    axs[word_df.shape[0],0].set_axis_off()
+    axs[word_df.shape[0],word_df.shape[1]-2].text(1,0.95,a.legend(),va='top',fontsize=18)
+    axs[word_df.shape[0],word_df.shape[1]-2].set_axis_off()
+    if checkbox:
+        axs[word_df.shape[0],0].text(1,0.95,a.word_bank(),va='top',fontsize=18)
+        axs[word_df.shape[0],0].set_axis_off()
     sns.despine(top=False,right=False)
-    # img_name = 'crossword.pdf'
-    # fig.savefig(img_name,format='pdf)
-    # # png_name = 'crossword.png'
-    # # with open(img_name, "rb") as f:
-    # #     st.download_button(
-    # #         label="Download as pdf",
-    # #         data=f,
-    # #         file_name=png_name,
-    # #         mime="image/png")
-
-    # checkbox = st.checkbox('Download PDF', value='')
-    # if checkbox:
     pdf_name = 'crossword.pdf'
     fig.savefig(pdf_name,format='pdf')
     # create_pdf(img_name, pdf_name)
@@ -478,10 +469,10 @@ st.title('Word Puzzle Generator')
 st.write('Pulls words and definitions from [this Google Sheet](https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/edit?usp=sharing)')
 
 st.header('Crossword Puzzle')
+checkbox = st.checkbox('Include word bank', value='')
 if st.button('Generate and preview Crossword Puzzle from word list'):
     a, size = generate_crossword(word_list)
     if len(a.current_word_list) != len(word_list):
         st.write('Could not fit all words into a crossword')
     else:
-        plot_crossword(a, size)
-        st.write(a.word_bank())
+        plot_crossword(a, size,checkbox)
