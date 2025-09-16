@@ -484,3 +484,4 @@ if st.button('Generate and preview Crossword Puzzle from word list'):
         st.write('Could not fit all words into a crossword')
     else:
         plot_crossword(a, size)
+        st.write(a.word_bank())
