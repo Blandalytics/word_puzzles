@@ -400,13 +400,13 @@ def generate_crossword(word_list):
     maxloops = 5000
     
     sizes_checked = 1/14
-    my_bar = st.progress(sizes_checked, text=f'Checking {size}x{size} grid')
+    my_bar = st.progress(sizes_checked, text=f'Trying {size}x{size} grid')
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
     while (len(a.current_word_list) != len(word_list)) & (size < 26):
         size +=1 
         sizes_checked += 1/14
-        my_bar.progress(sizes_checked, text=f'Checking {size}x{size} grid')
+        my_bar.progress(sizes_checked, text=f'Trying {size}x{size} grid')
         a = Crossword(size, size, '_', maxloops, word_list)
         a.compute_crossword(spins)
         
@@ -444,11 +444,11 @@ def plot_crossword(a, size, checkbox):
             else:
                 axs[y,x].set_axis_off()
         axs[word_df.shape[0],x].set_axis_off()
-    axs[word_df.shape[0],word_df.shape[1]-2].text(1,0.95,a.legend(),va='top',fontsize=18)
-    axs[word_df.shape[0],word_df.shape[1]-2].set_axis_off()
+    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
+    axs[word_df.shape[0],0].set_axis_off()
     if checkbox:
-        axs[word_df.shape[0],0].text(1,0.95,a.word_bank(),va='top',fontsize=18)
-        axs[word_df.shape[0],0].set_axis_off()
+        axs[word_df.shape[0],word_df.shape[1]-2].text(1,0.95,a.word_bank(),va='top',fontsize=18)
+        axs[word_df.shape[0],word_df.shape[1]-2].set_axis_off()
     sns.despine(top=False,right=False)
     pdf_name = 'crossword.pdf'
     fig.savefig(pdf_name,format='pdf')
