@@ -432,8 +432,8 @@ def plot_crossword(a, size, checkbox,title):
             else:
                 axs[y,x].set_axis_off()
         axs[word_df.shape[0],x].set_axis_off()
-    axs[word_df.shape[0],0].text(1,0.95,a.legend(),va='top',fontsize=18)
-    axs[word_df.shape[0],0].set_axis_off()
+    axs[word_df.shape[0],2].text(1,0.95,a.legend(),va='top',fontsize=18)
+    axs[word_df.shape[0],2].set_axis_off()
     if checkbox:
         axs[word_df.shape[0],word_df.shape[1]-5].text(1,0.95,'Word Bank:\n\n'+a.word_bank(),va='top',fontsize=18)
         axs[word_df.shape[0],word_df.shape[1]-5].set_axis_off()
