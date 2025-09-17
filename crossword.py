@@ -13,10 +13,8 @@ import seaborn as sns
 import string
 import textwrap
 import time
-import tqdm
 
 from copy import copy as duplicate
-from fpdf import FPDF
 
 class Crossword(object):
     def __init__(self, cols, rows, empty='-', maxloops=4000, available_words=[]):
@@ -379,19 +377,6 @@ class Word(object):
     def __repr__(self):
         return self.word
 
-def create_pdf(img_fn, pdf_fn):
-    """
-    Create pdf written to pdf_fn with the image file img_fn.
-    """
-    pdf = FPDF()
-    pdf.add_page()
-
-    # Save to pdf
-    pdf.set_xy(30, 50)
-    pdf.image(img_fn, w=140, h=110)
-    pdf.output(pdf_fn)
-
-
 word_list = [list(x) for x in pd.read_csv('https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/export?format=csv').to_numpy()]
 
 def generate_crossword(word_list):
@@ -452,7 +437,6 @@ def plot_crossword(a, size, checkbox):
     sns.despine(top=False,right=False)
     pdf_name = 'crossword.pdf'
     fig.savefig(pdf_name,format='pdf')
-    # create_pdf(img_name, pdf_name)
 
     with open(pdf_name, 'rb') as h_pdf:
         st.download_button(
