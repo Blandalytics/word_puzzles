@@ -437,7 +437,7 @@ def plot_crossword(a, size, checkbox,title):
     if checkbox:
         axs[word_df.shape[0],word_df.shape[1]-5].text(1,0.95,'Word Bank:\n\n'+a.word_bank(),va='top',fontsize=18)
         axs[word_df.shape[0],word_df.shape[1]-5].set_axis_off()
-    fig.suptitle(title,size=24,y=0.9)
+    fig.suptitle(title,size=24,y=0.85)
     sns.despine(top=False,right=False)
     pdf_name = 'crossword.pdf'
     fig.savefig(pdf_name,format='pdf')
