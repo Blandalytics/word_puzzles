@@ -401,7 +401,7 @@ def generate_crossword(word_list):
     my_bar.empty()
     return a, size
 
-def plot_crossword(a, size, checkbox):
+def plot_crossword(a, size, checkbox,title):
     letter_lists = [x.split() for x in a.display().split('\n')[:-1]]
     word_df = pd.DataFrame(letter_lists).replace('_',None)
     if (len(word_df[size-1].unique())==1) & (len(word_df.iloc[size-1].unique())==1):
@@ -437,6 +437,7 @@ def plot_crossword(a, size, checkbox):
     if checkbox:
         axs[word_df.shape[0],word_df.shape[1]-5].text(1,0.95,'Word Bank:\n\n'+a.word_bank(),va='top',fontsize=18)
         axs[word_df.shape[0],word_df.shape[1]-5].set_axis_off()
+    fig.suptitle(title,size=24)
     sns.despine(top=False,right=False)
     pdf_name = 'crossword.pdf'
     fig.savefig(pdf_name,format='pdf')
@@ -456,10 +457,11 @@ st.title('Word Puzzle Generator')
 st.write('Pulls words and definitions from [this Google Sheet](https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/edit?usp=sharing)')
 
 st.header('Crossword Puzzle')
+title = st.text_input("Crossword title", placeholder='Enter title text here')
 checkbox = st.checkbox('Include word bank', value='')
 if st.button('Generate and preview Crossword Puzzle from word list'):
     a, size = generate_crossword(word_list)
     if len(a.current_word_list) != len(word_list):
         st.write('Could not fit all words into a crossword')
     else:
-        plot_crossword(a, size,checkbox)
+        plot_crossword(a, size,checkbox,title)
