@@ -457,7 +457,7 @@ st.title('Word Puzzle Generator')
 st.write('Pulls words and definitions from [this Google Sheet](https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/edit?usp=sharing)')
 
 st.header('Crossword Puzzle')
-title = st.text_input("Crossword title", placeholder='Enter title text here',width=100)
+title = st.text_input("Crossword title", placeholder='Enter title text here',width=400)
 checkbox = st.checkbox('Include word bank', value='')
 if st.button('Generate and preview Crossword Puzzle from word list'):
     a, size = generate_crossword(word_list)
