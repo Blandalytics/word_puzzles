@@ -380,17 +380,20 @@ class Word(object):
 word_list = [list(x) for x in pd.read_csv('https://docs.google.com/spreadsheets/d/1Cq4oKuEy70fy31rYfRakSLjU4YmoZMfS6YxnbpaC0lk/export?format=csv').to_numpy()]
 
 def generate_crossword(word_list):
-    size = 12
+    longest_word = max([len(x[0]) for x in word_list])
+    size = longest_word + 2
+    max_size = 26
+    sizes_to_check = max_size - size
     spins = 3
     maxloops = 5000
     
-    sizes_checked = 1/14
+    sizes_checked = 1/sizes_to_check
     my_bar = st.progress(sizes_checked, text=f'Trying {size}x{size} grid')
     a = Crossword(size, size, '_', maxloops, word_list)
     a.compute_crossword(spins)
-    while (len(a.current_word_list) != len(word_list)) & (size < 26):
+    while (len(a.current_word_list) != len(word_list)) & (size < max_size):
         size +=1 
-        sizes_checked += 1/14
+        sizes_checked += 1/sizes_to_check
         my_bar.progress(sizes_checked, text=f'Trying {size}x{size} grid')
         a = Crossword(size, size, '_', maxloops, word_list)
         a.compute_crossword(spins)
